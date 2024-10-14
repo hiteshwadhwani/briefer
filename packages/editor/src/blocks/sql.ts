@@ -103,11 +103,7 @@ export function getSQLAttributes(
     ...getBaseAttributes(block),
     source: getSQLSource(block),
     status: getAttributeOr(block, 'status', 'idle'),
-    dataframeName: getAttributeOr(
-      block,
-      'dataframeName',
-      getDataframeName(blocks)
-    ),
+    dataframeName: getDataframeName(blocks),
     dataSourceId: getAttributeOr(block, 'dataSourceId', null),
     isFileDataSource: getAttributeOr(block, 'isFileDataSource', false),
     result: getAttributeOr(block, 'result', null),
@@ -180,6 +176,7 @@ function getDataframeName(blocks: Y.Map<YBlock>): DataframeName {
   const names = new Set(
     sqlBlocks.map((block) => block.getAttribute('dataframeName')?.value)
   )
+
 
   let i = 1
   while (names.has(`query_${i}`)) {
